@@ -1,0 +1,8 @@
+services:
+  web:
+    build:
+      context: ../client
+    image: henla-web:dev
+    ports:
+      - "8080:80"
+    restart: unless-stopped
