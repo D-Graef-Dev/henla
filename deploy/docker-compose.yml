@@ -6,3 +6,10 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+  api:
+    build:
+      context: ../backend
+    image: henla-api:dev
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
