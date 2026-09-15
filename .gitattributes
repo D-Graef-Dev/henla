@@ -1,0 +1,7 @@
+# Windows Here
+* text=auto eol=lf
+
+# Godot binaries and assets
+*.png binary
+*.ogg binary
+*.wav binday

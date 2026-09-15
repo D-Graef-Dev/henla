@@ -1,0 +1,17 @@
+# Godot import cache
+.godot/
+client/build/
+
+# Backend
+__pycache__/
+*__pyc
+.venv/
+
+# not part of the project
+commit-msg.txt
+
+# never commit
+.env
+
+
+
