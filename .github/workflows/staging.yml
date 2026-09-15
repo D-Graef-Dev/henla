@@ -1,0 +1,33 @@
+name: staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  export-web:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.7.2
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      # The image ships the templates under /root, but the job runs with a
+      # different HOME, so godot would not find them.
+      - name: Link export templates
+        run: |
+          mkdir -p ~/.local/share/godot
+          ln -s /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
+      
+      - name: Export web build
+        working-directory: client
+        run:
+          mkdir -p build
+          godot --headless --verbose --export-release "Web" build/index.html
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: client/build/
