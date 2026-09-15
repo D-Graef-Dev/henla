@@ -23,7 +23,7 @@ jobs:
       
       - name: Export web build
         working-directory: client
-        run:
+        run: |
           mkdir -p build
           godot --headless --verbose --export-release "Web" build/index.html
       
