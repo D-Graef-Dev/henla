@@ -55,3 +55,29 @@ jobs:
           docker build -t ghcr.io/d-graef-dev/henla-api:${{ github.sha }} backend
           docker push ghcr.io/d-graef-dev/henla-web:${{ github.sha }}
           docker push ghcr.io/d-graef-dev/henla-api:${{ github.sha }}
+
+  deploy:
+    needs: build-images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy over ssh
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+
+          ssh "$USER@$HOST" "GITHUB_SHA=${{ github.sha }} bash -s" <<'REMOTE'
+          set -e
+          cd /opt/henla
+          git pull
+          cd deploy
+          sed -i "s|^IMAGE_TAG=.*|IMAGE_TAG=$GITHUB_SHA|" .env
+          docker compose -f docker-compose.prod.yml pull
+          docker compose -f docker-compose.prod.yml up -d
+          REMOTE
