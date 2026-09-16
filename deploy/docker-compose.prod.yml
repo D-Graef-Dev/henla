@@ -1,0 +1,50 @@
+name: henla-staging
+
+services:
+  web:
+    image: ghcr.io/d-graef-dev/henla-web:${IMAGE_TAG}
+    restart: unless-stopped
+    networks: [proxy]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.henla-web.rule=Host(`staging.henla.${DOMAIN}`)"
+      - "traefik.http.routers.henla-web.entrypoints=websecure"
+      - "traefik.http.routers.henla-web.tls=true"
+      - "traefik.http.routers.henla-web.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.henla-web.middlewares=vpn-only@file,secured@file"
+      - "traefik.http.services.henla-web.loadbalancer.server.port=80"
+
+  api:
+    image: ghcr.io/d-graef-dev/henla-api:${IMAGE_TAG}
+    restart: unless-stopped
+    networks: [proxy, internal]
+    labels:
+     - "traefik.enable=true"
+     - "traefik.docker.network=proxy"
+     - "traefik.http.routers.henla-api.rule=Host(`staging.henla${DOMAIN}`) && PathPrefix(`/api`)"
+     - "traefik.http.routers.henla-api.entrypoints=websecure"
+     - "traefik.http.routers.henla-api.tls=true"
+     - "traefik.http.routers.henla-api.tls.certresolver=letsencrypt"
+     - "traefik.http.middlewares.henla-api-strip.stripprefix=/api"
+     - "traefik.http.routers.henla-api.middlewares=vpn-only@file,secured@file,henla-api-strip"
+     - "traefik.http.services.henla-api.loadbalancer.server.port=8000"
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    networks: [internal]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+     - pgdata:/var/lib/postgresql/data
+
+networks:
+  proxy:
+    external: true
+  internal:
+
+volumes:
+  pgdata:
+  
