@@ -26,7 +26,7 @@ services:
      - "traefik.http.routers.henla-api.tls=true"
      - "traefik.http.routers.henla-api.tls.certresolver=letsencrypt"
      - "traefik.http.middlewares.henla-api-strip.stripprefix=/api"
-     - "traefik.http.routers.henla-api.middlewares=vpn-only@file,secured@file,henla-api-strip"
+     - "traefik.http.routers.henla-api.middlewares=vpn-only@file,secured@file"
      - "traefik.http.services.henla-api.loadbalancer.server.port=8000"
 
   db:
@@ -47,4 +47,3 @@ networks:
 
 volumes:
   pgdata:
-  
