@@ -1,0 +1,68 @@
+GIMP Palette
+Name: Henla 64
+Columns: 8
+#
+ 20  16  26	Kontur - Kontur tief
+ 36  28  43	Kontur - Kontur dunkel
+ 58  44  56	Kontur - Kontur warm
+ 29  38  48	Kontur - Kontur kuehl
+ 43  61  38	Gras - Gras Schatten tief
+ 58  81  48	Gras - Gras Schatten
+ 74 102  58	Gras - Gras dunkel
+ 92 124  68	Gras - Gras Grundton
+111 146  80	Gras - Gras hell
+131 167  93	Gras - Gras Licht
+156 189 109	Gras - Gras Glanz
+ 47  74  58	Wald - Laub dunkel
+ 64 107  74	Wald - Laub mitte
+ 86 134  90	Wald - Laub hell
+ 59  42  30	Erde und Feld - Erde tief
+ 84  60  40	Erde und Feld - Erde dunkel
+110  82  51	Erde und Feld - Erde
+138 106  65	Erde und Feld - Acker
+168 135  90	Erde und Feld - Erde hell
+ 42  43  51	Fels und Stein - Fels tief
+ 61  63  74	Fels und Stein - Fels dunkel
+ 84  86  99	Fels und Stein - Fels
+108 111 125	Fels und Stein - Stein
+135 138 150	Fels und Stein - Stein hell
+165 168 178	Fels und Stein - Stein Licht
+ 58  36  24	Holz - Holz tief
+ 83  52  34	Holz - Holz dunkel
+109  72  48	Holz - Balken
+135  93  62	Holz - Holz
+162 121  79	Holz - Holz hell
+191 154 106	Holz - Holz Licht
+ 74  47  24	Messing Kupfer Gruenspan - Kupfer tief
+122  74  34	Messing Kupfer Gruenspan - Kupfer
+176 106  44	Messing Kupfer Gruenspan - Kupfer hell
+107  74  18	Messing Kupfer Gruenspan - Messing tief
+166 124  30	Messing Kupfer Gruenspan - Messing
+217 173  60	Messing Kupfer Gruenspan - Messing hell
+242 217 119	Messing Kupfer Gruenspan - Goldglanz
+ 47 107  92	Messing Kupfer Gruenspan - Gruenspan dunkel
+ 77 156 134	Messing Kupfer Gruenspan - Gruenspan
+ 28  28  34	Eisen und Russ - Russ
+ 51  52  61	Eisen und Russ - Eisen tief
+ 78  80  89	Eisen und Russ - Eisen
+110 112 121	Eisen und Russ - Stahl
+154 156 166	Eisen und Russ - Stahl hell
+ 74  22  32	Dach und Stoff - Rot tief
+124  36  48	Dach und Stoff - Dachrot
+178  58  58	Dach und Stoff - Rot hell
+ 29  51  85	Dach und Stoff - Blau tief
+ 47  85 136	Dach und Stoff - Blau
+ 75 128 184	Dach und Stoff - Blau hell
+106  44 107	Dach und Stoff - Violett Akzent
+ 16  40  63	Wasser - Tiefsee
+ 26  60  92	Wasser - Wasser tief
+ 37  84 121	Wasser - Wasser
+ 51 112 150	Wasser - Kueste
+ 75 147 176	Wasser - Flachwasser
+126 192 204	Wasser - Gischt
+138  90  60	Haut - Haut dunkel
+192 138  98	Haut - Haut mitte
+232 188 148	Haut - Haut hell
+244 236 216	UI und Neutral - Pergament
+201 191 166	UI und Neutral - UI mitte
+107  98  80	UI und Neutral - UI dunkel
