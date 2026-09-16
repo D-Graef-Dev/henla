@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
@@ -8,7 +8,7 @@ Instrumentator().instrument(app).expose(app)
 
 api = APIRouter(prefix="/api")
 
-@app.get("/health")
+@api.get("/health")
 def health():
     return {"status": "ok"}
 
