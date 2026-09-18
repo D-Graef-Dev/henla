@@ -12,10 +12,27 @@ var _target := Vector2.ZERO
 var _touches := {}
 var _pinch_start := 0.0
 
+# set by limit_to_map, a size of 0 means no limit yet
+var _map_size := 0.0
+var _inset := 0.0
+var _tile_size := Vector2.ZERO
 
 func _ready() -> void:
 	_target = position
 	zoom = Vector2.ONE * float(ZOOM_STEPS[_zoom_index])
+	_apply()
+
+
+func center_on(world_pos: Vector2) -> void:
+	_target = world_pos
+	_apply()
+
+
+# The camera centre stays at least inset cells away from the map edge.
+func limit_to_map(map_size: int, tile_size: Vector2i, inset: int) -> void:
+	_map_size = map_size
+	_tile_size = Vector2(tile_size)
+	_inset = inset
 	_apply()
 
 
@@ -116,4 +133,19 @@ func _zoom_to(index: int, anchor: Vector2) -> void:
 
 
 func _apply() -> void:
+	if _map_size > 0.0:
+		_target = _clamp_to_map(_target)
 	position = _target.round()
+
+
+# The map is a diamond, so clamp in cell coordinates. A plain rectangle
+# would let the camera drift into the empty corners.
+func _clamp_to_map(point: Vector2) -> Vector2:
+	var along := (point.x - _tile_size.x / 2.0) / _tile_size.x
+	var down := point.y / _tile_size.y
+	var cell_x := clampf(down + along, _inset, _map_size - _inset)
+	var cell_y := clampf(down - along, _inset, _map_size - _inset)
+	return Vector2(
+		(cell_x - cell_y) * _tile_size.x / 2.0 + _tile_size.x / 2.0,
+		(cell_x + cell_y) * _tile_size.y / 2.0
+	)
